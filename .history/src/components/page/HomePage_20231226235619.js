@@ -26,7 +26,7 @@ const HomePage = () => {
 		</div>
 	</div>
 </section>
-{/* <section class="features">
+<section class="features">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
@@ -66,7 +66,7 @@ const HomePage = () => {
 			</div>
 		</div>
 	</div>
-</section> */}
+</section>
 
 
 <section class="section about">
@@ -221,7 +221,86 @@ const HomePage = () => {
 		</div>
 	</div>
 </section>
+<section class="section appoinment">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 ">
+				<div class="appoinment-content">
+					<img src="images/about/img-3.jpg" alt="" class="img-fluid"/>
+					<div class="emergency">
+						<h2 class="text-lg"><i class="icofont-phone-circle text-lg"></i>+23 345 67980</h2>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-10 ">
+				<div class="appoinment-wrap mt-5 mt-lg-0">
+					<h2 class="mb-2 title-color">Book appoinment</h2>
+					<p class="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit . Iste dolorum atque similique praesentium soluta.</p>
+					     <form id="#" class="appoinment-form" method="post" action="#">
+                    <div class="row">
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                  <option>Choose Department</option>
+                                  <option>Software Design</option>
+                                  <option>Development cycle</option>
+                                  <option>Software Development</option>
+                                  <option>Maintenance</option>
+                                  <option>Process Query</option>
+                                  <option>Cost and Duration</option>
+                                  <option>Modal Delivery</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <select class="form-control" id="exampleFormControlSelect2">
+                                  <option>Select Doctors</option>
+                                  <option>Software Design</option>
+                                  <option>Development cycle</option>
+                                  <option>Software Development</option>
+                                  <option>Maintenance</option>
+                                  <option>Process Query</option>
+                                  <option>Cost and Duration</option>
+                                  <option>Modal Delivery</option>
+                                </select>
+                            </div>
+                        </div>
 
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="date" id="date" type="text" class="form-control" placeholder="dd/mm/yyyy"/>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="time" id="time" type="text" class="form-control" placeholder="Time"/>
+                            </div>
+                        </div>
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="name" id="name" type="text" class="form-control" placeholder="Full Name"/>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="phone" id="phone" type="Number" class="form-control" placeholder="Phone Number"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-2 mb-4">
+                        <textarea name="message" id="message" class="form-control" rows="6" placeholder="Your Message"></textarea>
+                    </div>
+
+                    <a class="btn btn-main btn-round-full" href="appoinment.html" >Make Appoinment <i class="icofont-simple-right ml-2  "></i></a>
+                </form>
+            </div>
+			</div>
+		</div>
+	</div>
+</section>
 
 <section class="section clients">
 	<div class="container">
@@ -294,35 +373,7 @@ const HomePage = () => {
 
 
 
-<div class="elementor-column-wrap elementor-element-populated">
-<div class="elementor-widget-wrap">
-<div class="elementor-element elementor-element-7f61fa5c elementor-widget elementor-widget-heading" data-id="7f61fa5c" data-element_type="widget" data-widget_type="heading.default">
-<div class="elementor-widget-container">
-<h2 class="elementor-heading-title elementor-size-default">Team Of Consultants</h2> </div>
-</div>
-<div class="elementor-element elementor-element-12d79441 elementor-widget elementor-widget-shortcode" data-id="12d79441" data-element_type="widget" data-widget_type="shortcode.default">
-<div class="elementor-widget-container">
-<div class="elementor-shortcode"><div class="sectionrow"><div class="cols4 skt-team-box">
-<a href="https://sktthemesdemo.net/medical/our-team/jonathan-doe/" title="Jonathan Doe"> <div class="team-thumb-outer"><div class="team-thumb">
-<img width="200" height="200" src="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img1.png" class="attachment-full size-full wp-post-image" alt="member-img1" decoding="async" loading="lazy" srcset="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img1.png 200w, https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img1-150x150.png 150w" sizes="(max-width: 200px) 100vw, 200px"/>
-</div></div></a><div class="team-info-box"><div class="member-info">
-<h3 class="team-title"><a href="https://sktthemesdemo.net/medical/our-team/jonathan-doe/">Jonathan Doe</a></h3><span class="team-designation">Doctor</span></div><div class="veriety-box-number">1</div></div></div><div class="cols4 skt-team-box">
-<a href="https://sktthemesdemo.net/medical/our-team/jennifer-doe/" title="Jennifer Doe"> <div class="team-thumb-outer"><div class="team-thumb">
-<img width="200" height="200" src="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img2.png" class="attachment-full size-full wp-post-image" alt="member-img2" decoding="async" loading="lazy" srcset="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img2.png 200w, https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img2-150x150.png 150w" sizes="(max-width: 200px) 100vw, 200px"/>
-    </div></div></a><div class="team-info-box"><div class="member-info">
-<h3 class="team-title"><a href="https://sktthemesdemo.net/medical/our-team/jennifer-doe/">Jennifer Doe</a></h3><span class="team-designation">Doctor</span></div><div class="veriety-box-number">2</div></div></div><div class="cols4 skt-team-box">
-<a href="https://sktthemesdemo.net/medical/our-team/john-doe/" title="John Doe"> <div class="team-thumb-outer"><div class="team-thumb">
-<img width="200" height="200" src="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img3.png" class="attachment-full size-full wp-post-image" alt="member-img3" decoding="async" loading="lazy" srcset="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img3.png 200w, https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img3-150x150.png 150w" sizes="(max-width: 200px) 100vw, 200px"/>
-</div></div></a><div class="team-info-box"><div class="member-info">
-<h3 class="team-title"><a href="https://sktthemesdemo.net/medical/our-team/john-doe/">John Doe</a></h3><span class="team-designation">Doctor</span></div><div class="veriety-box-number">3</div></div></div><div class="cols4 skt-team-box">
-<a href="https://sktthemesdemo.net/medical/our-team/martina-doe/" title="Martina Doe"> <div class="team-thumb-outer"><div class="team-thumb">
-<img width="200" height="200" src="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img4.png" class="attachment-full size-full wp-post-image" alt="member-img4" decoding="async" loading="lazy" srcset="https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img4.png 200w, https://sktthemesdemo.net/medical/wp-content/uploads/2019/10/member-img4-150x150.png 150w" sizes="(max-width: 200px) 100vw, 200px"/>
-</div></div></a><div class="team-info-box"><div class="member-info">
-<h3 class="team-title"><a href="https://sktthemesdemo.net/medical/our-team/martina-doe/">Martina Doe</a></h3><span class="team-designation">Nurse</span></div><div class="veriety-box-number">4</div></div></div><div class="clear"></div></div></div>
-</div>
-</div>
-</div>
-</div>
+
         </>
     );
 };

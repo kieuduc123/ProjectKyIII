@@ -179,7 +179,7 @@ const About = () => {
 	</div>
 </section>
 
-{/* <section class="section testimonial">
+<section class="section testimonial">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 offset-lg-6">
@@ -249,7 +249,7 @@ const About = () => {
 			</div>
 		</div>
 	</div>
-</section> */}
+</section>
          
 
             {/* <!-- End Aim --> */}

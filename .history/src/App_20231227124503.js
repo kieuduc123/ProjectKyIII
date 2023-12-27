@@ -1,4 +1,4 @@
-// import Login from "components/auth/Login";
+import Login from "components/auth/Login";
 import React, { Fragment, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "utils/Footer";

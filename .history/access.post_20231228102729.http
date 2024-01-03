@@ -1,0 +1,596 @@
+                                              // CANDIDATE ( USER CLIENT )
+//PHAN 1: PRODUCT
+
+### Get all products (lấy theo phân trang: 10 elements/page )
+GET https://pharmacyonline.azurewebsites.net/api/Product?page=1
+Content-Type: application/json
+
+{
+   
+}
+/*
+Ghi chú: LINK NÀY SẼ CÓ 5 THAM SỐ:
+chức năng của link này: FILTER, SEARCH, SORT,GET PAGINATE, GET NEWEST.
+CÁC THAM SỐ NHƯ SAU:
+1. isNewest = NEW -> (NEW || AVAILABLE) lấy ra các product mới nhất( cách đây 2 ngày ) ví dụ: https://localhost:7224/api/Product?isNewest=NEW&page=1 
+
+2. search = machine -> search theo tên or title product. ví dụ: https://localhost:7224/api/Product?search=mach&page=1
+
+3. cate = 2 -> lấy ra các sản phẩm theo categoryId. ví dụ: https://localhost:7224/api/Product?cate=2&page=1
+
+4. sorting = NAME_ASD -> ( NAME_ASD || NAME_DESC ) sắp xếp tên các sản phẩm tăng dần. ví dụ: https://localhost:7224/api/Product?sorting=NAME_DESC&page=1
+
+5. page = 1 -> lấy trang thứ nhất
+
+ví dụ đường link đầy đủ:
+https://localhost:7224/api/Product?isNewest=AVAILABLE&search=machi&cate=2&sorting=NAME_DESC&page=1
+
+*/
+
+
+### Get product detail
+GET https://pharmacyonline.azurewebsites.net/api/Product/getdetail?idProduct=4
+Content-Type: application/json
+
+{
+   
+}
+/*
+Ghi chú: link có 1 tham số
+idProduct = 9 -> xem detail sản phẩm thứ 9
+*/
+
+
+
+###  GET ALL Category
+GET https://pharmacyonline.azurewebsites.net/api/Product/getall/category
+Content-Type: application/json
+
+{
+   
+}
+
+
+// PHẦN 2: ĐĂNG KÝ ĐĂNG NHẬP TÀI KHOẢN
+
+### Đăng ký tài khoản
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/candidate/register
+Content-Type: application/json
+
+{
+  "username": "vietanh",
+  "email": "dovietanh2k@gmail.com",
+  "password": "123456789",
+  "confirmPassword": "123456789"
+}
+
+### nhập mã xác nhận OTP & gửi lại mã otp cho email
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/candidate/verify&resent/otp
+Content-Type: application/json
+
+{
+  "otp": "ABC123",
+  "email": "dovietanh2k@gmail.com"
+}
+/*
+GHI CHÚ: CÓ 2 TRƯỜNG DỮ LIỆU:
+1. otp: nhập mã otp
+2. email: nhập email
+
+-> Trong trường hợp ta muốn gửi lại mã otp cho email thì ta chỉ cần gửi mỗi trường email lên server:
+
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/candidate/verify&resent/otp
+Content-Type: application/json
+
+{
+  "email": "dovietanh2k@gmail.com"
+}
+
+
+*/
+
+
+### Login
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/login
+Content-Type: application/json
+
+{
+  "email": "conbonha2k@gmail.com",
+  "password": "123456789"
+}
+
+
+### Lấy thông tin cá nhân thông qua token được trả về( sẽ ko trả về Id, Name, image ... mà sẽ phải tự động gửi token lên để lấy về )
+GET https://pharmacyonline.azurewebsites.net/api/ManageCandidates/candidate/getinforms/token
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+
+
+
+### refresh token (lấy lại access token)
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/candidate/refreshtoken
+Content-Type: application/json
+
+{
+  "id": 7,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzA0NjU0NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.gqgQ9jnRrexkU04EGT7zgSFIk-6jxKb24fPf_XjduDg"
+}
+
+
+
+### Logout
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/candidate/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzA0NjU0NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.gqgQ9jnRrexkU04EGT7zgSFIk-6jxKb24fPf_XjduDg
+
+{
+    "id": 8
+}
+
+
+### đăng nhập qua google 
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/candidate/login/google
+Content-Type: application/json
+
+{
+  "token": ""
+}
+/* ghi chú: để sử dụng đường link này đòi hỏi phải setup trên react trước
+sau khi login qua GOOGLE vào react js trả về mã token thành công 
+gửi đoạn mã token của google vào dữ liệu trong đường link này để lưu trên server
+*/
+
+
+
+### Chỉnh sửa thông tin cá nhân trong website( đặt lại tên, và chỉnh sửa avatar )
+POST https://pharmacyonline.azurewebsites.net/api/ManageCandidates/candidate/update/inform
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  "id": 7,
+  "username": "viet anh",
+  "thumbnail": ,
+}
+/*
+nên test bằng postman để truyền dữ liệu file vào trường "thumbnail"
+*/
+
+
+
+// PHẦN 3 TẠO HỒ SƠ & UPDATE HỒ SƠ & SUBMIT HỒ SƠ ...
+
+### Lấy thông tin cá nhân thông qua token được trả về
+POST https://pharmacyonline.azurewebsites.net/api/Profile/candidate/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  "idCandidate": 7,
+  "fullname": "string",
+  "address": "string",
+  "number": "string",
+  "email": "string",
+  "thumbnail": ,
+  "fileCv": ,
+  "skills": "string",
+  "universityOrCollege": "string",
+  "major": "string",
+  "issuedDate": "2023-12-23T09:02:45.451Z",
+  "expiryDate": "2023-12-23T09:02:45.451Z",
+  "scientificAchievements": "string",
+  "workExperiences": "string",
+  "reference": "string"
+}
+/*
+Ghi chú:
+Đường link này nên test trên POSTMAN để truyền dữ liệu vào file! 
+*/
+
+### UPDATE PROFILE
+POST https://pharmacyonline.azurewebsites.net/api/Profile/candidate/update?idProfileDetail=ASG123
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+  {
+  "idCandidate": 7,
+  "fullname": "string",
+  "address": "string",
+  "number": "string",
+  "email": "string",
+  "thumbnail": "string",
+  "fileCv": ,
+  "skills": ,
+  "universityOrCollege": "string",
+  "major": "string",
+  "issuedDate": "2023-12-23T09:06:17.312Z",
+  "expiryDate": "2023-12-23T09:06:17.312Z",
+  "scientificAchievements": "string",
+  "workExperiences": "string",
+  "reference": "string"
+}
+/*
+Ghi chú: truyền tham số
+idProfileDetail = ASG123 -> chỉnh sửa profile có id = "ASG123"
+
+Đường link này nên test trên POSTMAN để truyền dữ liệu vào file! 
+*/
+
+
+### Submit profile 
+POST https://pharmacyonline.azurewebsites.net/api/Profile/candidate/submit?idCandidate=7&idProfileDetail=ASG123
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+/*
+Ghi chú: truyền tham số
+idCandidate = 7    -> chuyền idCandidate 
+idProfileDetail = ASG123   -> chuyền id của Hồ sơ đẻ submit 
+
+Ở đây khi submit client sẽ hiện ra một bảng chữ nếu submit thành công
+sẽ ghi 
+"Cảm ơn bạn đâ nộp thông tin vào website của công ty chúng tôi
+chúng tôi sẽ sớm kiểm tra thông tin của bạn. Nếu trong vòng 15 ngày không có
+phản hồi thì tự động hồ sơ của bạn coi như bị loại. cảm ơn 
+"
+
+*/
+
+
+### Huý hồ sơ đang submitted
+GET https://pharmacyonline.azurewebsites.net/api/Profile/candidate/cancel?idCandidate=7&idProfileDetail=ASG123
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+/*
+Ghi chú: truyền tham số
+idCandidate = 7    -> chuyền idCandidate 
+idProfileDetail = ASG123   -> chuyền id của Hồ sơ đẻ submit 
+*/
+
+### Xoá hồ sơ khi CHÚNG TA chưa submit OR LÀ ĐÃ CANCEL SUBMIT ĐỂ CHỈNH SỬA
+GET https://pharmacyonline.azurewebsites.net/api/Profile/candidate/delete?idCandidate=7&idProfileDetail=ASG123
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+/*
+Ghi chú: truyền tham số
+idCandidate = 7    -> chuyền idCandidate 
+idProfileDetail = ASG123   -> chuyền id của Hồ sơ đẻ submit 
+*/
+
+
+### lấy ra các hồ sơ ĐANG CHỈNH SỬA Ở DƯỚI CLIENT CHƯA SUBMIT
+GET https://pharmacyonline.azurewebsites.net/api/Profile/candidate/getprofile?idCandidate=7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+/*
+Ghi chú: truyền tham số
+idCandidate = 7    -> chuyền idCandidate lấy ra các hồ sơ theo idCandidate 
+*/
+
+
+### LẤY RA LỊCH SỬ CÁC HỒ SƠ ĐÃ SUBMIT
+GET https://pharmacyonline.azurewebsites.net/api/Profile/candidate/gethistory?idCandidate=7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+/*
+Ghi chú: truyền tham số
+idCandidate = 7    -> chuyền idCandidate lấy ra các hồ sơ theo idCandidate 
+*/
+
+
+
+
+
+                                                              // ADMIN:
+// PHẦN 1: TẠO TÀI KHOẢN & QUẢN LÝ USER
+
+### tạo tài khoản ADMIN
+POST https://pharmacyonline.azurewebsites.net/api/Authentication/admin/register
+Content-Type: application/json
+
+{
+  "username": "admin deptrai",
+  "password": "12345678",
+  "confirmPassword": "12345678"
+}
+
+// * đăng nhập login & các api sản phẩm ở trên!
+
+
+### SEARCH OR GET 
+GET https://pharmacyonline.azurewebsites.net/api/ManageCandidates/admin/search&getlist?search=Duc&page=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+/*
+ghi chú:
+-> chuyền tham số thì search. bỏ tham số search là get: "/api/ManageCandidates/admin/search&getlist?page=1"
+*/
+
+
+
+### Bật tắt trạng thái của USER ( cho đăng nhập or ko cho đăng nhập tài khoản )
+GET https://pharmacyonline.azurewebsites.net/api/ManageCandidates/admin/toggle/user?id=7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  
+}
+/*
+Ghi chú: truyền vào tham số
+id = 7 -> tài khoản id của candidate số 7 sẽ bị block hoặc mở block
+*/
+
+
+//PHẦN 2: LÀM VIỆC VỚI PROFILE CỦA CANDIDATE
+
+### Duyệt profile ( và gửi mail )
+POST https://pharmacyonline.azurewebsites.net/api/Profile/admin/approved
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  "idProfileDetail": "SGV124",
+  "isQualified": 1,
+  "body": {
+    "to": "dovietanh2k@gmail.com",
+    "interviewAddress": "đường Tôn Thất Thuyết Bến xe MD ... etc",
+    "appointment": "2023-12-29T02:32:29.242Z",
+    "content": "mang theoo bát cơm và ít tôm hùm"
+  }
+}
+
+### LOẠI profile
+POST https://pharmacyonline.azurewebsites.net/api/Profile/admin/approved
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+  "idProfileDetail": "SGV124",
+  "isQualified": 2
+}
+/*
+có thể điền body or không
+{
+  "idProfileDetail": "SGV124",
+  "isQualified": 2,
+  "body": ""
+}
+*/
+
+
+
+### search theo tên và sdt của hồ sơ được gửi lên server 
+GET https://pharmacyonline.azurewebsites.net/api/Profile/admin/search?search=0979278962&page=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+
+}
+
+### xem profile detail  
+GET https://pharmacyonline.azurewebsites.net/api/Profile/admin/getdetail?IdProfile=ASG123
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+
+}
+
+### lấy ra danh sách profile đã submit mới nhất:
+GET https://pharmacyonline.azurewebsites.net/api/Profile/admin/getlist/submitted?page=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+
+}
+
+### lấy ra lịch sử danh sách profile đã duyệt mới nhất ( bao gồm các profile loại và không bị loại )
+GET https://pharmacyonline.azurewebsites.net/api/Profile/admin/getlist/history?page=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+
+}
+/*
+GHI CHÚ:
+lấy ra lịch sử các profile đã loại: https://pharmacyonline.azurewebsites.net/api/Profile/admin/getlist/history?isQualified=UNQUALIFIED&page=1
+lấy ra lịch sử các profile đã duyệt: https://pharmacyonline.azurewebsites.net/api/Profile/admin/getlist/history?isQualified=QUALIFIED&page=1
+*/
+
+### download file cv của ứng viên về cho admin( nếu cần )
+GET https://pharmacyonline.azurewebsites.net/api/Profile/admin/download/fileCV?idProfileDetail=ASG123
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+
+}
+
+
+
+// PHẦN 3 THỐNG KÊ 
+
+### Thống kê theo Tháng, TUẦN, NGÀY
+GET https://pharmacyonline.azurewebsites.net/api/Statistic/admin/get
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+{
+
+}
+
+
+// PHẦN 4 THÊM SỬA XOÁ: SẢN PHẨM
+
+// Dựa theo categoryID chúng ta sẽ đưa ra form để tạo sản phẩm cho đúng
+/* 
+  {
+    "id": 1,
+    "cateName": "Capsule/Encapsulation"
+  },
+  {
+    "id": 2,
+    "cateName": "LiquidFilling"
+  },
+  {
+    "id": 3,
+    "cateName": "Tablet"
+  }
+*/
+
+
+### TẠO PRODUCT TABLETl
+POST https://pharmacyonline.azurewebsites.net/api/Product/admin/create/product/tablet
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+  {
+  "cateId": 3,
+  "productName": "pharmacy machine ASHCJS",
+  "title": "machine super fast",
+  "thumbnail": null,
+  "modelNumber": "SUC123",
+  "dies": "50kg",
+  "maxPressure": "100kg",
+  "maxDiameterOfTablet": "102k/m",
+  "maxDepthOfFill": "203",
+  "productionCapacity": "100",
+  "machineSize": "1,2m",
+  "netWeight": "30kg"
+}
+/*
+GHI CHÚ: nên tạo bằng postman để thêm ảnh
+*/
+
+
+### TẠO PRODUCT CAPSULE
+POST https://pharmacyonline.azurewebsites.net/api/Product/admin/create/product/capsule
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+  {
+  "cateId": 1,
+  "productName": "pharmacy machine ASHCJS",
+  "title": "machine super fast",
+  "thumbnail": null,
+  "Output": "120c/ms",
+  "CapsuleSize": "1m",
+  "MachineDimension": "100kg",
+  "ShippingWeight": "10kg"
+}
+/*
+GHI CHÚ: nên tạo bằng postman để thêm ảnh
+*/
+
+### TẠO PRODUCT LIQUID
+POST https://pharmacyonline.azurewebsites.net/api/Product/admin/create/product/liquid
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+  {
+  "cateId": 1,
+  "productName": "pharmacy machine ASHCJS",
+  "title": "machine super fast",
+  "thumbnail": null,
+  "AirPressure": "120c/ms",
+  "AirVolume": "1m",
+  "FillingSpeed": "100kg",
+  "FillingRange": "10kg"
+}
+/*
+GHI CHÚ: nên tạo bằng postman để thêm ảnh
+*/
+
+
+### UPDATE PRODUCT TABLETl
+POST https://pharmacyonline.azurewebsites.net/api/Product/admin/update/product/tablet
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+  {
+  "id": 12,
+  "productName": "pharmacy machine ASHCJS",
+  "title": "machine super fast",
+  "thumbnail": null,
+  "modelNumber": "SUC123",
+  "dies": "50kg",
+  "maxPressure": "100kg",
+  "maxDiameterOfTablet": "102k/m",
+  "maxDepthOfFill": "203",
+  "productionCapacity": "100",
+  "machineSize": "1,2m",
+  "netWeight": "30kg"
+}
+/*
+GHI CHÚ: nên tạo bằng postman để thêm ảnh
+*/
+
+
+### TẠO PRODUCT CAPSULE
+POST https://pharmacyonline.azurewebsites.net/api/Product/admin/update/product/capsule
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+  {
+  "id": 13,
+  "productName": "pharmacy machine ASHCJS",
+  "title": "machine super fast",
+  "thumbnail": null,
+  "Output": "120c/ms",
+  "CapsuleSize": "1m",
+  "MachineDimension": "100kg",
+  "ShippingWeight": "10kg"
+}
+/*
+GHI CHÚ: nên tạo bằng postman để thêm ảnh
+*/
+
+### TẠO PRODUCT LIQUID
+POST https://pharmacyonline.azurewebsites.net/api/Product/admin/update/product/liquid
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkb3ZpZXRhbmgya0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5oIGtldSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwMzEzODI2NCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.eX0K9EPHZaQt-jHjZp7I5i394imoOwaH5awd0xlzkCY
+
+  {
+  "id": 1,
+  "productName": "pharmacy machine ASHCJS",
+  "title": "machine super fast",
+  "thumbnail": null,
+  "AirPressure": "120c/ms",
+  "AirVolume": "1m",
+  "FillingSpeed": "100kg",
+  "FillingRange": "10kg"
+}
+/*
+GHI CHÚ: nên tạo bằng postman để thêm ảnh
+*/

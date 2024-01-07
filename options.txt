@@ -1,0 +1,46 @@
+Đường link chia profile submitted và EDIT ( vẫn cùng 1 đường link nhưng khác giá trị tham số )
+
+GET https://pharmacyonline.azurewebsites.net/api/Profile/candidate/getprofile?idCandidate=25&status=SUMITTED
+
+GET https://pharmacyonline.azurewebsites.net/api/Profile/candidate/getprofile?idCandidate=25&status=EDIT
+
+GET https://pharmacyonline.azurewebsites.net/api/Profile/candidate/getprofile?idCandidate=25
+
+
+
+CÁC OPTIONS CẦN ĐIỀN:
+address ( cho điền tay cũng được -> nếu có option thì phải cỗng chuỗi "Ha Noi" + "quê quán" )
+city + address
+
+
+
+workExperiences
+1 year
+2 years
+3 years
+4 years
+other ... 
+
+
+major
+Nghiên Cứu Bào chế thuốc
+Dược Lâm Sàng.
+Dược Cổ truyền
+Quản lý & Kinh tế dược
+Công Nghiệp Dược
+other...
+
+
+universityOrCollege
+Đại học Y Dược Hà Nội
+Học Viện Quân Y
+Đại học Y Dược (Đại học Quốc gia Hà Nội)
+Đại học Dược
+Đại học Y Dược (Đại học Thái Nguyên)
+other ...
+
+
+
+
+
+

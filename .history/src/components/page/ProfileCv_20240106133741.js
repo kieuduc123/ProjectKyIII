@@ -69,7 +69,6 @@ const ProfileCv = () => {
         }
     }, []);
     const accessToken = localStorage.getItem("currentUser");
-
     const handleFormCv = async (e) => {
         e.preventDefault();
         try {
@@ -193,6 +192,7 @@ const ProfileCv = () => {
                             enctype="multipart/form-data"
                             onSubmit={handleFormCv}
                         >
+                            //  quay laại đi!
                             <div class="col-md-6 border-right">
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">

@@ -157,7 +157,7 @@ formData.append("gender" , gender);
             toast.error("Error");
         }
     };
-
+//
     return (
         <div>
             <section class="page-title bg-1">

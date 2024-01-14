@@ -93,7 +93,7 @@ const ProfileCv = () => {
                 dateOfBirth,
                 gender,
             };
-
+// thôi cứ làm theo caách của 
             const font = {
                 "candidateId": 20,
                 "fullname": "minh",

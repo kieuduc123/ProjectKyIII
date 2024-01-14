@@ -1,0 +1,110 @@
+import React, { useRef } from 'react';
+import axios from 'axios';
+
+function MyForm() {
+  const formRef = useRef();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(formRef.current);
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjM4IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZHVja3R0aDIyMDYwMzdAZnB0LmVkdS52biIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJLaWV1IFRydW5nIER1YyAoQXB0ZWNoIEhOKSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkNhbmRpZGF0ZSIsImV4cCI6MTcwNTE2NzUxOCwiaXNzIjoiVDIyMDdBX0FTUE5FVF9BUEkiLCJhdWQiOiJWSUVUQU5IIn0.aFE-OKzsmpd-I2YCu6WGyyaWLwpBn62OFyHqHT-2Uz4'; 
+    // đưa token vào đây
+    // anh hiểu trươcớc vi sao maày lôỗi rồi! nêu lânần nayày lỗi thì khả năng là do thăằng này  useRef naày nó hỗ trojw kiêu lây form khac thôi cứ test thử đi dã xem có dđuoược ko nêu sko đươợc thì để fix!
+
+    try {
+      const response = await axios.post('https://pharmacyonline.azurewebsites.net/api/Profile/candidate/create', formData, {
+        headers: {
+            Authorization: `Bearer ${token}`,// Sử dụng token ở đây
+        }
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <form ref={formRef} onSubmit={handleSubmit}>
+      <label>
+        IdCandidate:
+        <input type="text" name="IdCandidate" />
+      </label> 
+
+        <label>
+            Fullname
+            <input type="text" name="Fullname" />
+        </label>
+
+        <label>
+            Address
+            <input type="text" name="Address"/>
+        </label>
+
+        <label>
+            Number
+            <input type="text" name="Number"/>
+        </label>
+
+      <label>
+        Email:
+        <input type="text" name="Email" />
+      </label>
+
+     <labe>
+        Thumbnail
+        <input type="file" name="Thumbnail" />
+     </labe>
+
+     <label>
+        FileCv
+        <input type="file" name="FileCv" />
+     </label>
+     
+     <label>
+        Skills
+        <input type="text" name="Skills" />
+     </label>
+
+     <label>
+            UniversityOrCollege
+        <input type="text" name="UniversityOrCollege" />
+     </label>
+
+    <label>
+        Major
+        <input type="text" name="Major" />
+    </label>
+
+<label>
+        issuedDate
+        <input type="date" name="IssuedDate" />
+</label>
+
+<label>
+    ExpiryDate
+    <input type="date" name="ExpiryDate" />
+</label>
+
+<label>
+    Reference
+    <input type="text" name="Reference" />
+</label>
+
+<label>
+    Age
+    <input type="text" name="DateOfBirth" />
+</label>
+
+<label>
+    Gender
+    <input type="text" name="Gender" />
+</label>
+
+
+      <button type="submit">Gửi</button>
+    </form>
+  );
+  }
+
+export default MyForm;

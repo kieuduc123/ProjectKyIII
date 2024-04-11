@@ -31,7 +31,7 @@ const navigate = useNavigate();
                 }
             );
             if (rs?.data.status === 204) {
-                toast.success(rs.data.statusMessage);
+                toast.success(rs.data.statusMessage);;
                  setText(rs);
                  console.log("Cancel",rs);
             }
@@ -89,9 +89,7 @@ console.log("Profile",idCandidate.id);
             // toast.error("Error")
         }
     };  
-    useEffect(() => {
-        getProfile()
-    },[])
+
 
 
 ///get ra lich su

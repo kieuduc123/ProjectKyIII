@@ -32,6 +32,7 @@ const navigate = useNavigate();
             );
             if (rs?.data.status === 204) {
                 toast.success(rs.data.statusMessage);
+                toast.delete(rs.data.statusMessage)
                  setText(rs);
                  console.log("Cancel",rs);
             }

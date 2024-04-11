@@ -6,7 +6,7 @@ const NotFound = () => {
     return (
      
             <section className="page_404">
-  <div className="container product">
+  <div className="container">
     <div className="row"> 
     <div className="col-sm-12 ">
     <div className="col-sm-12 col-sm-offset-1  text-center">

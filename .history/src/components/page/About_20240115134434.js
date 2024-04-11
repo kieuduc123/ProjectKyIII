@@ -34,7 +34,7 @@ Over the following years, Pharmacy expanded its store network and became a renow
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2>FAQ </h2>
+                    <h2>Faq & Stuff</h2>
                 </div>
 
                 <div class="col-12 col-lg-6 mb-5 mb-lg-0">

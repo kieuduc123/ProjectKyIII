@@ -48,7 +48,6 @@ ul li:hover > ul, ul li ul:hover {
   height: 3rem;
   width: auto;
   cursor: pointer;
-  width: 60px;
 }
 
 .sub-item {

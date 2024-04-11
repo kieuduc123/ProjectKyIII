@@ -100,13 +100,13 @@ const HomePage = () => {
                                 </h2>
 
                                 <div class="call-btn button gradient-bg">
-                                    {/* <a
+                                    <a
                                         class="d-flex justify-content-center align-items-center"
                                         href="#"
                                     >
                                         <img src="images/emergency-call.png" />{" "}
                                         +34 586 778 8892
-                                    </a> */}
+                                    </a>
                                 </div>
 
                                 <p>

@@ -65,7 +65,7 @@ const Login = () => {
                     toast.success(res.data.statusMessage);
                     localStorage.setItem( "currentUser", res?.data?.accessToken);
                     navigate("/");
-                    window.location.reload();
+                    window.location.reload()
                 } else  if(res?.data?.status === 401 || res?.data?.status === 403  || res?.data?.status === 404) {
                     toast.error(res?.data?.statusMessage);
                 }         

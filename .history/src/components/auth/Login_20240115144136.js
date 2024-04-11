@@ -27,6 +27,7 @@ const Login = () => {
 
 //login google
     const handleGoogleLogin = async (credentialResponse) => {
+        console.log(credentialResponse.credential);
         const decode = jwtDecode(credentialResponse.credential);
       
         try {
@@ -38,8 +39,9 @@ const Login = () => {
           );
           localStorage.setItem( "currentUser", backendResponse?.data?.accessToken);
           toast.success("Thành Công");
+          console.log(backendResponse);
           navigate("/");
-          window.location.reload()
+          window.reload();
         } catch (error) {
           console.error('Error communicating with the backend:', error);
         }
@@ -65,7 +67,6 @@ const Login = () => {
                     toast.success(res.data.statusMessage);
                     localStorage.setItem( "currentUser", res?.data?.accessToken);
                     navigate("/");
-                    window.location.reload();
                 } else  if(res?.data?.status === 401 || res?.data?.status === 403  || res?.data?.status === 404) {
                     toast.error(res?.data?.statusMessage);
                 }         

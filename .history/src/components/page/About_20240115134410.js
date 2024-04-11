@@ -34,7 +34,7 @@ Over the following years, Pharmacy expanded its store network and became a renow
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2>FAQ </h2>
+                    <h2>Faq & Stuff</h2>
                 </div>
 
                 <div class="col-12 col-lg-6 mb-5 mb-lg-0">
@@ -52,12 +52,10 @@ Over the following years, Pharmacy expanded its store network and became a renow
                             <p>Yes, you can typically refill your prescription online or over the phone. However, it is recommended to check with your pharmacy or healthcare provider for specific instructions on how to refill your prescription</p>
                         </div>
 
-                        <h3 onClick={ () => setShow(!show)} class="entry-title d-flex justify-content-between align-items-center">Is it safe to drink alcohol while taking this medication?
-
-<span class="arrow-r"></span></h3>
+                        <h3 onClick={ () => setShow(!show)} class="entry-title d-flex justify-content-between align-items-center">How should I take this medication?<span class="arrow-r"></span></h3>
 
                         <div class="entry-content" className={`entry-content ${show ? 'block' : 'hidden'}`}>
-                            <p>It is not recommended to consume alcohol while taking this medication as it may interact and cause adverse effects.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris.</p>
                         </div>
                     </div>
                 </div>
